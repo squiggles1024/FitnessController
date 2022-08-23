@@ -1,0 +1,13 @@
+/*
+ * trigger.h
+ *
+ *  Created on: Aug 22, 2022
+ *      Author: evanl
+ */
+
+#ifndef INC_FITNESSCONTROLLER_CONTROLLER_PARTS_TRIGGER_H_
+#define INC_FITNESSCONTROLLER_CONTROLLER_PARTS_TRIGGER_H_
+
+
+
+#endif /* INC_FITNESSCONTROLLER_CONTROLLER_PARTS_TRIGGER_H_ */

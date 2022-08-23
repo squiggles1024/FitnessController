@@ -1,0 +1,4 @@
+../Core/Src/FitnessController_ApplicationLayer/DeviceInfoService/DeviceInfoService.c:147:27:AddDeviceInfoService	24	static
+../Core/Src/FitnessController_ApplicationLayer/DeviceInfoService/DeviceInfoService.c:161:10:GetDeviceInfoServiceHandle	4	static
+../Core/Src/FitnessController_ApplicationLayer/DeviceInfoService/DeviceInfoService.c:165:34:InitDeviceInfoCharacteristics	32	static
+../Core/Src/FitnessController_ApplicationLayer/DeviceInfoService/DeviceInfoService.c:179:34:AddDeviceInfoCharacteristics	64	static

@@ -1,0 +1,5 @@
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:35:6:FitnessControllerBLEInit	48	static
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:84:6:FitnessController_BLE_Process	8	static
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:96:13:AddServices	16	static
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:121:19:SetConnectable	48	static
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:132:13:ControllerEventNotify	16	static

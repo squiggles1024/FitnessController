@@ -1,0 +1,4 @@
+../Core/Src/FitnessController_ApplicationLayer/HIDService/HIDService.c:153:20:AddHIDService	24	static
+../Core/Src/FitnessController_ApplicationLayer/HIDService/HIDService.c:167:10:GetHIDServiceHandle	4	static
+../Core/Src/FitnessController_ApplicationLayer/HIDService/HIDService.c:171:27:AddHIDCharacteristics	64	static
+../Core/Src/FitnessController_ApplicationLayer/HIDService/HIDService.c:194:27:InitHIDCharacteristicValues	40	static

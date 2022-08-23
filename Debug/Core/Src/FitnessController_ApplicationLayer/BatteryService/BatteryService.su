@@ -1,0 +1,6 @@
+../Core/Src/FitnessController_ApplicationLayer/BatteryService/BatteryService.c:81:24:AddBatteryService	24	static
+../Core/Src/FitnessController_ApplicationLayer/BatteryService/BatteryService.c:103:10:GetBatteryServiceHandle	4	static
+../Core/Src/FitnessController_ApplicationLayer/BatteryService/BatteryService.c:107:31:AddBatteryCharacteristics	64	static
+../Core/Src/FitnessController_ApplicationLayer/BatteryService/BatteryService.c:129:31:InitBatteryValue	16	static
+../Core/Src/FitnessController_ApplicationLayer/BatteryService/BatteryService.c:135:31:UpdateBatteryValue	24	static
+../Core/Src/FitnessController_ApplicationLayer/BatteryService/BatteryService.c:148:16:GetBatteryValue	4	static
