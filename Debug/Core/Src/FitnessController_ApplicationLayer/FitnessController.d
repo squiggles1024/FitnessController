@@ -22,6 +22,9 @@ Core/Src/FitnessController_ApplicationLayer/FitnessController.o: \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_adc.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_exti.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h \
@@ -57,9 +60,16 @@ Core/Src/FitnessController_ApplicationLayer/FitnessController.o: \
  ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_updater_aci.h \
  ../Middlewares/ST/BlueNRG-MS/includes/hci_le.h \
  ../Core/Inc/FitnessController/FitnessController.h \
+ ../Core/Inc/FitnessController/Controller_Parts/button.h \
+ ../Core/Inc/FitnessController/Controller_Parts/button_hardware.h \
+ ../Core/Inc/FitnessController/Controller_Parts/trigger.h \
+ ../Core/Inc/FitnessController/Controller_Parts/trigger_hardware.h \
+ ../Core/Inc/FitnessController/Controller_Parts/analog_stick.h \
+ ../Core/Inc/FitnessController/Controller_Parts/analog_stick_hardware.h \
  ../Core/Inc/FitnessController/HIDService/HIDService.h \
  ../Core/Inc/FitnessController/BatteryService/BatteryService.h \
- ../Core/Inc/FitnessController/DeviceInfoService/DeviceInfoService.h
+ ../Core/Inc/FitnessController/DeviceInfoService/DeviceInfoService.h \
+ ../Core/Inc/FitnessController/HIDService/HID.h
 ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_utils.h:
 ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_types.h:
 ../Middlewares/ST/BlueNRG-MS/includes/compiler.h:
@@ -82,6 +92,9 @@ Core/Src/FitnessController_ApplicationLayer/FitnessController.o: \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_adc.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_exti.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h:
@@ -117,6 +130,13 @@ Core/Src/FitnessController_ApplicationLayer/FitnessController.o: \
 ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_updater_aci.h:
 ../Middlewares/ST/BlueNRG-MS/includes/hci_le.h:
 ../Core/Inc/FitnessController/FitnessController.h:
+../Core/Inc/FitnessController/Controller_Parts/button.h:
+../Core/Inc/FitnessController/Controller_Parts/button_hardware.h:
+../Core/Inc/FitnessController/Controller_Parts/trigger.h:
+../Core/Inc/FitnessController/Controller_Parts/trigger_hardware.h:
+../Core/Inc/FitnessController/Controller_Parts/analog_stick.h:
+../Core/Inc/FitnessController/Controller_Parts/analog_stick_hardware.h:
 ../Core/Inc/FitnessController/HIDService/HIDService.h:
 ../Core/Inc/FitnessController/BatteryService/BatteryService.h:
 ../Core/Inc/FitnessController/DeviceInfoService/DeviceInfoService.h:
+../Core/Inc/FitnessController/HIDService/HID.h:

@@ -1,0 +1,2 @@
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick.c:22:6:AnalogStickInit	24	static
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick.c:36:21:AnalogStickRead	24	static

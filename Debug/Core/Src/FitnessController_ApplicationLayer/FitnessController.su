@@ -1,5 +1,10 @@
-../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:35:6:FitnessControllerBLEInit	48	static
-../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:84:6:FitnessController_BLE_Process	8	static
-../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:96:13:AddServices	16	static
-../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:121:19:SetConnectable	48	static
-../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:132:13:ControllerEventNotify	16	static
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:60:6:FitnessControllerBLEInit	48	static
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:109:6:FitnessController_BLE_Process	16	static
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:121:6:FitnessControllerHardwareInit	16	static
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:127:29:FitnessControllerUpdateState	24	static
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:157:13:AddServices	16	static
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:182:19:SetConnectable	48	static
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:193:13:ControllerEventNotify	16	static
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:197:13:ControllerButtonInit	56	static
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:209:13:ControllerTriggerInit	32	static
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c:214:13:ControllerStickInit	32	static

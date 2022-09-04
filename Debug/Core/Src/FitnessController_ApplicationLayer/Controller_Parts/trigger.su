@@ -1,0 +1,2 @@
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger.c:22:6:TriggerInit	24	static
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger.c:35:17:TriggerRead	24	static

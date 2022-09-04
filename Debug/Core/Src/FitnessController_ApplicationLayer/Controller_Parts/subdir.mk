@@ -6,18 +6,27 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick.c \
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick_hardware.c \
 ../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button.c \
-../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger.c 
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button_hardware.c \
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger.c \
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger_hardware.c 
 
 OBJS += \
 ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick.o \
+./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick_hardware.o \
 ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button.o \
-./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger.o 
+./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button_hardware.o \
+./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger.o \
+./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger_hardware.o 
 
 C_DEPS += \
 ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick.d \
+./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick_hardware.d \
 ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button.d \
-./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger.d 
+./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button_hardware.d \
+./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger.d \
+./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger_hardware.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -27,7 +36,7 @@ Core/Src/FitnessController_ApplicationLayer/Controller_Parts/%.o Core/Src/Fitnes
 clean: clean-Core-2f-Src-2f-FitnessController_ApplicationLayer-2f-Controller_Parts
 
 clean-Core-2f-Src-2f-FitnessController_ApplicationLayer-2f-Controller_Parts:
-	-$(RM) ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick.d ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick.o ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick.su ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button.d ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button.o ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button.su ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger.d ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger.o ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger.su
+	-$(RM) ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick.d ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick.o ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick.su ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick_hardware.d ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick_hardware.o ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/analog_stick_hardware.su ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button.d ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button.o ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button.su ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button_hardware.d ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button_hardware.o ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button_hardware.su ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger.d ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger.o ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger.su ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger_hardware.d ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger_hardware.o ./Core/Src/FitnessController_ApplicationLayer/Controller_Parts/trigger_hardware.su
 
 .PHONY: clean-Core-2f-Src-2f-FitnessController_ApplicationLayer-2f-Controller_Parts
 

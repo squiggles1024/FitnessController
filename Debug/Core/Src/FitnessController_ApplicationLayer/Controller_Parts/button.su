@@ -1,0 +1,2 @@
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button.c:22:6:ButtonInit	24	static
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/button.c:36:16:ButtonRead	24	static
