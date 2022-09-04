@@ -19,9 +19,16 @@
 #include "HIDService.h"
 #include "BatteryService.h"
 #include "DeviceInfoService.h"
+#include "HID.h"
 
 #define DEVICE_CONNECTABLE (1)
 #define DEVICE_CONNECTED (0)
+#define XINPUT_LEFT_THUMB_INDEX  (6U)
+#define XINPUT_RIGHT_THUMB_INDEX (7U)
+#define XINPUT_LEFTANALOG_INDEX (0U)
+#define XINPUT_RIGHTANALOG_INDEX (1U)
+
+FitnessControllerHandle_t FitnessController;
 
 static const uint8_t SERVER_BDADDR[] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
 static const char local_name[] = {AD_TYPE_COMPLETE_LOCAL_NAME,'F', 'i', 't', 'n', 'e','s','s',' ','C','o','n','t','r','o','l','l','e','r'};
@@ -29,7 +36,25 @@ static uint8_t connected = DEVICE_CONNECTABLE;
 static void AddServices(void);
 static tBleStatus SetConnectable(void);
 static void ControllerEventNotify(void *pData);
-
+static void ControllerButtonInit(FitnessControllerHandle_t *FitnessController);
+static void ControllerTriggerInit(FitnessControllerHandle_t *FitnessController);
+static void ControllerStickInit(FitnessControllerHandle_t *FitnessController);
+static const uint16_t ButtonMskLUT[NUMBER_OF_BUTTONS] = {
+		0x0001, //dpad up
+		0x0002, //dpad down
+		0x0004, //dpad left
+		0x0008, //dpad right
+		0x0010, //start
+		0x0020, //back
+		0x0040, //left thumb
+		0x0080, //right thumb
+		0x0100, //left shoulder
+		0x0200, //right shoulder
+		0x1000, //a
+		0x2000, //b
+		0x4000, //x
+		0x8000  //y
+};
 
 
 void FitnessControllerBLEInit(void){
@@ -82,16 +107,51 @@ void FitnessControllerBLEInit(void){
 }
 
 void FitnessController_BLE_Process(void){
-
-
 	//make device discoverable
 	if(connected){
 		SetConnectable();
 	}
-	//update controller
-    //if new controller data is available:
-	//call SendHIDData();
+	FitnessControllerDataFlag_t DataFlag = FitnessControllerUpdateState(&FitnessController);
+    if(DataFlag == FC_NewDataAvailable){
+    	SendHIDData();
+    }
 	hci_user_evt_proc();
+}
+
+void FitnessControllerHardwareInit(FitnessControllerHandle_t *FitnessController){
+	ControllerButtonInit(FitnessController);
+	ControllerTriggerInit(FitnessController);
+	ControllerStickInit(FitnessController);
+}
+
+FitnessControllerDataFlag_t FitnessControllerUpdateState(FitnessControllerHandle_t *FitnessController){
+	FitnessControllerDataFlag_t ReturnStatus = FC_NoDataAvailable;
+    for(uint8_t i = 0; i < NUMBER_OF_BUTTONS; i++){
+    	if(ButtonRead(&FitnessController->Buttons[i].Button) == ButtonChanged){
+    		ReturnStatus |= FC_NewDataAvailable;
+            if(FitnessController->Buttons[i].Button.State == ButtonPressed){
+            	HIDReport.Buttons |= FitnessController->Buttons[i].ButtonMsk;
+            } else {
+            	HIDReport.Buttons &= ~(FitnessController->Buttons[i].ButtonMsk);
+            }
+    	}
+    }
+
+    for(uint8_t i = 0; i < NUMBER_OF_TRIGGERS; i++){
+        if(TriggerRead(&FitnessController->Triggers[i]) == TriggerChanged){
+        	ReturnStatus |= FC_NewDataAvailable;
+        	HIDReport.Triggers[i] = FitnessController->Triggers[i].Position;
+        }
+    }
+
+    for(uint8_t i = 0; i < NUMBER_OF_STICKS; i++){
+        if(AnalogStickRead(&FitnessController->Sticks[i]) == AnalogStickChanged){
+        	ReturnStatus |= FC_NewDataAvailable;
+        	HIDReport.Sticks[i*2] = FitnessController->Sticks[i].X_Position;
+        	HIDReport.Sticks[i*2+1] = FitnessController->Sticks[i].Y_Position;
+        }
+    }
+    return ReturnStatus;
 }
 
 static void AddServices(void){
@@ -134,3 +194,24 @@ static void ControllerEventNotify(void *pData){
 
 }
 
+static void ControllerButtonInit(FitnessControllerHandle_t *FitnessController){
+	for(uint8_t i = 0; i < NUMBER_OF_BUTTONS; i++){
+		FitnessController->Buttons[i].ButtonMsk = ButtonMskLUT[i];
+		if(i != XINPUT_LEFT_THUMB_INDEX && i != XINPUT_RIGHT_THUMB_INDEX){
+		    ButtonInit(i, &FitnessController->Buttons[i].Button, ButtonIO_DriverPosLogic);
+		} else {
+			ButtonInit(i, &FitnessController->Buttons[i].Button, ButtonIO_DriverNegLogic);
+		}
+	}
+
+}
+
+static void ControllerTriggerInit(FitnessControllerHandle_t *FitnessController){
+	TriggerInit(&FitnessController->Triggers[XINPUT_LEFTANALOG_INDEX], TriggerIO_Driver1);
+	TriggerInit(&FitnessController->Triggers[XINPUT_RIGHTANALOG_INDEX], TriggerIO_Driver2);
+}
+
+static void ControllerStickInit(FitnessControllerHandle_t *FitnessController){
+   AnalogStickInit(&FitnessController->Sticks[XINPUT_LEFTANALOG_INDEX], AnalogStickIO_Driver1);
+   AnalogStickInit(&FitnessController->Sticks[XINPUT_RIGHTANALOG_INDEX], AnalogStickIO_Driver2);
+}
