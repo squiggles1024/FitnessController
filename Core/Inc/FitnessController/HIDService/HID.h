@@ -16,8 +16,8 @@ typedef struct{
 } __attribute__((packed)) HIDInfoChar_t;
 
 typedef struct{
-	uint16_t Sticks[2];
-	uint16_t Triggers[2];
+	int16_t Sticks[4];
+	uint8_t Triggers[2];
 	uint16_t Buttons;
 }__attribute__((packed)) HIDReportChar_t;
 
@@ -26,6 +26,6 @@ typedef uint8_t HIDControlPoint_t;
 extern HIDControlPoint_t HIDControlPoint;
 extern HIDReportChar_t HIDReport;
 extern const HIDInfoChar_t HIDInfoValue;
-extern const uint8_t HID_ReportMap[178];
+extern const uint8_t HID_ReportMap[59];
 
 #endif /* INC_FITNESSCONTROLLER_HIDSERVICE_HID_H_ */
