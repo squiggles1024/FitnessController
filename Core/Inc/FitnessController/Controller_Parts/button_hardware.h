@@ -1,46 +1,48 @@
 /*
- * trigger.h
+ * button_hardware.h
  *
- *  Created on: Aug 22, 2022
+ *  Created on: Sep 2, 2022
  *      Author: evanl
  */
 
-#ifndef INC_FITNESSCONTROLLER_CONTROLLER_PARTS_TRIGGER_H_
-#define INC_FITNESSCONTROLLER_CONTROLLER_PARTS_TRIGGER_H_
+#ifndef INC_FITNESSCONTROLLER_CONTROLLER_PARTS_BUTTON_HARDWARE_H_
+#define INC_FITNESSCONTROLLER_CONTROLLER_PARTS_BUTTON_HARDWARE_H_
 /**************************************//**************************************//**************************************
  * Includes
  **************************************//**************************************//**************************************/
-#include "trigger_hardware.h"
 #include <stdint.h>
+
+
+/**************************************//**************************************//**************************************
+ * Defines
+ **************************************//**************************************//**************************************/
+#define NUMBER_OF_BUTTONS (14U)
 
 /**************************************//**************************************//**************************************
  * Enums
  **************************************//**************************************//**************************************/
-#define NUMBER_OF_TRIGGERS (2U)
-
-
 typedef enum{
-	TriggerChanged = 0,
-	TriggerUnchanged,
-	TriggerErr
-}TriggerStatus_t;
+	ButtonUnpressed = 0,
+	ButtonPressed
+}ButtonState_t;
 
 /**************************************//**************************************//**************************************
  * Driver Structs
  **************************************//**************************************//**************************************/
-
 typedef struct{
-    uint8_t Position;
-    Trigger_IO_Drv_t IO_Driver;
-}Trigger_Handle_t;
+    void (*init)(void);
+    void (*deinit)(void);
+    ButtonState_t (*read)(uint8_t);
+    void (*write)(void);
+    uint8_t (*ioctl)(uint8_t);
+}Button_IO_Drv_t;
 
 /**************************************//**************************************//**************************************
- * Public Function Declarations
+ * Exported Variables
  **************************************//**************************************//**************************************/
-void TriggerInit(Trigger_Handle_t *Trigger, Trigger_IO_Drv_t IO);
-TriggerStatus_t TriggerRead(Trigger_Handle_t *Trigger);
+extern const Button_IO_Drv_t ButtonIO_DriverPosLogic;
+extern const Button_IO_Drv_t ButtonIO_DriverNegLogic;
 
 
 
-
-#endif /* INC_FITNESSCONTROLLER_CONTROLLER_PARTS_TRIGGER_H_ */
+#endif /* INC_FITNESSCONTROLLER_CONTROLLER_PARTS_BUTTON_HARDWARE_H_ */
