@@ -19,8 +19,8 @@ typedef enum{
 }HIDServiceStatus_t;
 
 HIDServiceStatus_t AddHIDService(void);
-
 uint16_t GetHIDServiceHandle(void);
+void SendHIDData(void);
 
 
 #endif /* INC_FITNESSCONTROLLER_HIDSERVICE_HIDSERVICE_H_ */

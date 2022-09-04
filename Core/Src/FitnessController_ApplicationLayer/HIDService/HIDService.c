@@ -95,7 +95,6 @@ static const uint16_t HIDCharUUIDLookUpTable[HID_SERVICE_CHAR_QTY] = {
 		HID_REPORTMAP_UUID,
 		HID_CONTROLPT_UUID,
 		HID_REPORT_UUID
-
 };
 
 static uint16_t HIDCharValueLenLookUpTable[HID_SERVICE_CHAR_QTY] = {
@@ -196,29 +195,13 @@ static HIDServiceStatus_t InitHIDCharacteristicValues(void){
 
 	for(uint8_t i = HID_INFO_INDEX; i < HID_SERVICE_CHAR_QTY; i++){
 
-		if(HIDCharValueLenLookUpTable[i] && i != HID_REPORTMAP_INDEX){
+		if(HIDCharValueLenLookUpTable[i]){
 			status = aci_gatt_update_char_value_ext_IDB05A1(HidServiceHandle,              //Handle of the service to which the characteristic belongs.
 							                            HIDCharHandleLookUpTable[i],       //Handle of the characteristic.
 														0,                                 //The offset from which the attribute value has to be updated
 														0,
 														0,
 														HIDCharValueLenLookUpTable[i],     //Length of the value to be updated
-														HIDCharValueLookUpTable[i]);       //Updated characteristic value
-		} else if (HIDCharValueLenLookUpTable[i] && i == HID_REPORTMAP_INDEX){ /* Deal with Report Map Timeout bug. */
-			status = aci_gatt_update_char_value_ext_IDB05A1(HidServiceHandle,              //Handle of the service to which the characteristic belongs.
-							                            HIDCharHandleLookUpTable[i],       //Handle of the characteristic.
-														0,                                 //The offset from which the attribute value has to be updated
-														0,
-														0,
-														HIDCharValueLenLookUpTable[i] / 2,     //Length of the value to be updated
-														HIDCharValueLookUpTable[i]);       //Updated characteristic value
-
-			status = aci_gatt_update_char_value_ext_IDB05A1(HidServiceHandle,              //Handle of the service to which the characteristic belongs.
-							                            HIDCharHandleLookUpTable[i],       //Handle of the characteristic.
-														HIDCharValueLenLookUpTable[i] / 2, //The offset from which the attribute value has to be updated
-														0,
-														0,
-														HIDCharValueLenLookUpTable[i] / 2, //Length of the value to be updated
 														HIDCharValueLookUpTable[i]);       //Updated characteristic value
 		}
 
@@ -229,6 +212,16 @@ static HIDServiceStatus_t InitHIDCharacteristicValues(void){
         }
 	}
 	return HID_OK;
+}
+
+void SendHIDData(void){
+	aci_gatt_update_char_value_ext_IDB05A1(HidServiceHandle,              //Handle of the service to which the characteristic belongs.
+					                            HIDCharHandleLookUpTable[HID_REPORT_INDEX],       //Handle of the characteristic.
+												0,                                                //The offset from which the attribute value has to be updated
+												0,
+												0,
+												HIDCharValueLenLookUpTable[HID_REPORT_INDEX],     //Length of the value to be updated
+												HIDCharValueLookUpTable[HID_REPORT_INDEX]);       //Updated characteristic value
 }
 
 
