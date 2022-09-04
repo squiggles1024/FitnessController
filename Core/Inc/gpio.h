@@ -39,7 +39,9 @@ extern "C" {
 void MX_GPIO_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+void Button_GPIO_Init(void);
+void ADC_GPIO_Init(void);
+void BLE_GPIO_Init(void);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
