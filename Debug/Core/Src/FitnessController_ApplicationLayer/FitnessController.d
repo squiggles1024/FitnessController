@@ -58,6 +58,8 @@ Core/Src/FitnessController_ApplicationLayer/FitnessController.o: \
  ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_l2cap_aci.h \
  ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_hal_aci.h \
  ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_updater_aci.h \
+ ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gap_aci.h \
+ ../Middlewares/ST/BlueNRG-MS/includes/sm.h \
  ../Middlewares/ST/BlueNRG-MS/includes/hci_le.h \
  ../Core/Inc/FitnessController/FitnessController.h \
  ../Core/Inc/FitnessController/Controller_Parts/button.h \
@@ -128,6 +130,8 @@ Core/Src/FitnessController_ApplicationLayer/FitnessController.o: \
 ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_l2cap_aci.h:
 ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_hal_aci.h:
 ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_updater_aci.h:
+../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gap_aci.h:
+../Middlewares/ST/BlueNRG-MS/includes/sm.h:
 ../Middlewares/ST/BlueNRG-MS/includes/hci_le.h:
 ../Core/Inc/FitnessController/FitnessController.h:
 ../Core/Inc/FitnessController/Controller_Parts/button.h:

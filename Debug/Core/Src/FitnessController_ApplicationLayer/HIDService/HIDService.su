@@ -1,5 +1,5 @@
-../Core/Src/FitnessController_ApplicationLayer/HIDService/HIDService.c:152:20:AddHIDService	24	static
-../Core/Src/FitnessController_ApplicationLayer/HIDService/HIDService.c:166:10:GetHIDServiceHandle	4	static
-../Core/Src/FitnessController_ApplicationLayer/HIDService/HIDService.c:170:27:AddHIDCharacteristics	64	static
-../Core/Src/FitnessController_ApplicationLayer/HIDService/HIDService.c:193:27:InitHIDCharacteristicValues	40	static
-../Core/Src/FitnessController_ApplicationLayer/HIDService/HIDService.c:217:6:SendHIDData	24	static
+../Core/Src/FitnessController_ApplicationLayer/HIDService/HIDService.c:155:20:AddHIDService	24	static
+../Core/Src/FitnessController_ApplicationLayer/HIDService/HIDService.c:169:10:GetHIDServiceHandle	4	static
+../Core/Src/FitnessController_ApplicationLayer/HIDService/HIDService.c:173:27:AddHIDCharacteristics	64	static
+../Core/Src/FitnessController_ApplicationLayer/HIDService/HIDService.c:196:27:InitHIDCharacteristicValues	64	static
+../Core/Src/FitnessController_ApplicationLayer/HIDService/HIDService.c:234:6:SendHIDData	24	static
