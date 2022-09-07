@@ -32,13 +32,15 @@
 #define HID_CONTROLPT_UUID_TYPE         (UUID_TYPE_16)
 #define HID_REPORT_UUID_TYPE            (UUID_TYPE_16)
 
-
-#define HID_SERVICE_UUID       (0x1809) //Health Thermometer for debug purposes.
-//#define HID_SERVICE_UUID       (0x1812)
+//#define HID_SERVICE_UUID       (0x1809) //Health Thermometer for debug purposes.
+#define HID_SERVICE_UUID       (0x1812)
 #define HID_INFO_UUID          (0x2A4A)
 #define HID_REPORTMAP_UUID     (0x2A4B)
 #define HID_CONTROLPT_UUID     (0x2A4C)
 #define HID_REPORT_UUID        (0x2A4D)
+
+
+#define HID_REPORTREF_DESC_UUID   (0x2908)
 
 
 #define HID_INFO_VALUELEN            (sizeof(HIDInfoValue))
@@ -82,6 +84,7 @@
 
 static uint16_t HidServiceHandle;
 static uint16_t HIDCharHandleLookUpTable[HID_SERVICE_CHAR_QTY];
+static uint16_t HIDReportDescHandle;
 
 static const uint8_t HIDCharUUIDType[HID_SERVICE_CHAR_QTY] = {
 		HID_INFO_UUID_TYPE,
@@ -194,34 +197,49 @@ static HIDServiceStatus_t InitHIDCharacteristicValues(void){
 	tBleStatus status;
 
 	for(uint8_t i = HID_INFO_INDEX; i < HID_SERVICE_CHAR_QTY; i++){
-
-		if(HIDCharValueLenLookUpTable[i]){
-			status = aci_gatt_update_char_value_ext_IDB05A1(HidServiceHandle,              //Handle of the service to which the characteristic belongs.
+		status = aci_gatt_update_char_value_ext_IDB05A1(HidServiceHandle,              //Handle of the service to which the characteristic belongs.
 							                            HIDCharHandleLookUpTable[i],       //Handle of the characteristic.
-														0,                                 //The offset from which the attribute value has to be updated
+														NOTIFICATION,                      //The offset from which the attribute value has to be updated
 														0,
 														0,
 														HIDCharValueLenLookUpTable[i],     //Length of the value to be updated
 														HIDCharValueLookUpTable[i]);       //Updated characteristic value
-		}
+
 
         if(status != BLE_STATUS_SUCCESS){
         	printf("Error Initializing Characteristic\n\r");
         	printf(HIDCharErrorStringLookUpTable[i]);
         	return HIDCharErrorReturnLookUpTable[i];
         }
+        if(i == HID_REPORT_INDEX){
+        	 uint16_t desc_uuid = HID_REPORTREF_DESC_UUID;
+             status = aci_gatt_add_char_desc(HidServiceHandle,
+            		                         HIDCharHandleLookUpTable[HID_REPORT_INDEX],
+											 UUID_TYPE_16 ,
+											 (const uint8_t*)&desc_uuid,
+											 sizeof(ReportRefDesc),
+											 sizeof(ReportRefDesc),
+											 (const void*)&ReportRefDesc,
+											 ATTR_PERMISSION_NONE,
+											 ATTR_ACCESS_READ_ONLY,
+											 GATT_DONT_NOTIFY_EVENTS ,
+											 7,
+											 0,
+											 &HIDReportDescHandle);
+        }
 	}
 	return HID_OK;
 }
 
 void SendHIDData(void){
-	aci_gatt_update_char_value_ext_IDB05A1(HidServiceHandle,              //Handle of the service to which the characteristic belongs.
+	aci_gatt_update_char_value_ext_IDB05A1(     HidServiceHandle,                                     //Handle of the service to which the characteristic belongs.
 					                            HIDCharHandleLookUpTable[HID_REPORT_INDEX],       //Handle of the characteristic.
-												0,                                                //The offset from which the attribute value has to be updated
+												NOTIFICATION,                                                //The offset from which the attribute value has to be updated
 												0,
 												0,
 												HIDCharValueLenLookUpTable[HID_REPORT_INDEX],     //Length of the value to be updated
 												HIDCharValueLookUpTable[HID_REPORT_INDEX]);       //Updated characteristic value
+
 }
 
 
