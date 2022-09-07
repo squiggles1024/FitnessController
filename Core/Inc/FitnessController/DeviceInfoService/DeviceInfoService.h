@@ -16,6 +16,7 @@ typedef enum{
 	 DeviceInfo_ModelNumCharErr,
 	 DeviceInfo_SerialNumCharErr,
 	 DeviceInfo_HardwareRevCharErr,
+	 DeviceInfo_PnPIDCharErr,
 	 DeviceInfo_OK
 }DeviceInfoServiceStatus_t;
 
