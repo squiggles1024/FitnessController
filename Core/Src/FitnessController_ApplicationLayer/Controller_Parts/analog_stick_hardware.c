@@ -63,29 +63,29 @@ static void AnalogStickIODeInit(void){
  **************************************//**************************************/
 static void AnalogStickIORead1(int16_t *X_Pos, int16_t *Y_Pos){
 	int16_t Convert = (adc_buffer[ADC_LX_INDEX] << 4) - 32767;
-	if(Convert < 3276 && Convert > -3277){ //10% of Max
+	/*if(Convert < 3276 && Convert > -3277){ //10% of Max
 		Convert = 0;
-	}
+	}*/
 	*X_Pos = Convert;
 
     Convert = (adc_buffer[ADC_LY_INDEX] << 4) - 32767;
-	if(Convert < 3276 && Convert > -3277){ //10% of Max
+	/*if(Convert < 3276 && Convert > -3277){ //10% of Max
 		Convert = 0;
-	}
+	}*/
 	*Y_Pos = Convert;
 }
 
 static void AnalogStickIORead2(int16_t *X_Pos, int16_t *Y_Pos){
 	int16_t Convert = (adc_buffer[ADC_RX_INDEX] << 4) - 32767;
-	if(Convert < 3276 && Convert > -3277){ //10% of Max
+	/*if(Convert < 3276 && Convert > -3277){ //10% of Max
 		Convert = 0;
-	}
+	}*/
 	*X_Pos = Convert;
 
     Convert = (adc_buffer[ADC_RY_INDEX] << 4) - 32767;
-	if(Convert < 3276 && Convert > -3277){ //10% of Max
+	/*if(Convert < 3276 && Convert > -3277){ //10% of Max
 		Convert = 0;
-	}
+	}*/
 	*Y_Pos = Convert;
 }
 
