@@ -101,6 +101,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	HAL_Delay(5);
 	FitnessController_BLE_Process();
     /* USER CODE END WHILE */
 
