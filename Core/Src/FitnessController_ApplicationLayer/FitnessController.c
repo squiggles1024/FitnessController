@@ -14,6 +14,8 @@
 #include "bluenrg_types.h"
 #include "bluenrg_gap.h"
 #include "bluenrg_aci.h"
+#include "bluenrg_gap_aci.h"
+#include "sm.h"
 #include "hci_le.h"
 #include "FitnessController.h"
 #include "HIDService.h"
@@ -23,6 +25,8 @@
 
 #define DEVICE_CONNECTABLE (1)
 #define DEVICE_CONNECTED (0)
+#define DEVICE_DISCOVERABLE (1)
+#define DEVICE_NOTDISCOVERABLE (0)
 #define XINPUT_LEFT_THUMB_INDEX  (6U)
 #define XINPUT_RIGHT_THUMB_INDEX (7U)
 #define XINPUT_LEFTANALOG_INDEX (0U)
@@ -32,9 +36,11 @@ FitnessControllerHandle_t FitnessController;
 
 static const uint8_t SERVER_BDADDR[] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
 static const char local_name[] = {AD_TYPE_COMPLETE_LOCAL_NAME,'F', 'i', 't', 'n', 'e','s','s',' ','C','o','n','t','r','o','l','l','e','r'};
+static uint16_t connection_handle = 0xFFFF;
 static uint8_t connected = DEVICE_CONNECTABLE;
+static uint8_t discoverable = DEVICE_NOTDISCOVERABLE;
 static void AddServices(void);
-static tBleStatus SetConnectable(void);
+static tBleStatus SetDiscoverable(void);
 static void ControllerEventNotify(void *pData);
 static void ControllerButtonInit(FitnessControllerHandle_t *FitnessController);
 static void ControllerTriggerInit(FitnessControllerHandle_t *FitnessController);
@@ -46,14 +52,14 @@ static const uint16_t ButtonMskLUT[NUMBER_OF_BUTTONS] = {
 		0x0008, //dpad right
 		0x0010, //start
 		0x0020, //back
-		0x0040, //left thumb
-		0x0080, //right thumb
-		0x0100, //left shoulder
-		0x0200, //right shoulder
-		0x1000, //a
-		0x2000, //b
-		0x4000, //x
-		0x8000  //y
+		0x1000, //left thumb
+		0x2000, //right thumb
+		0x0040, //left shoulder
+		0x0080, //right shoulder
+		0x0100, //a
+		0x0200, //b
+		0x0400, //x
+		0x0800  //y
 };
 
 
@@ -62,7 +68,7 @@ void FitnessControllerBLEInit(void){
 
 	uint8_t bdaddr[BD_ADDR_SIZE]; //Device address
 	const char *DeviceName = "Evan's Fitness Controller"; //Device Name
-	uint16_t service_handle,  dev_name_char_handle, appearance_char_handle;
+	uint16_t service_handle, dev_name_char_handle, appearance_char_handle;
 	uint8_t hwVersion;
 	uint16_t fwVersion;
 
@@ -103,13 +109,29 @@ void FitnessControllerBLEInit(void){
 	status = aci_gatt_update_char_value(service_handle,appearance_char_handle,0,2,&test_appearance_value);
 	AddServices();
 
+	status = aci_gap_set_io_capability(IO_CAP_NO_INPUT_NO_OUTPUT);
+	if(status != BLE_STATUS_SUCCESS){
+        printf("aci_gap_set_io_capabilities failed\n\r");
+	}
+	status = aci_gap_set_auth_requirement(MITM_PROTECTION_NOT_REQUIRED,
+			                              OOB_AUTH_DATA_ABSENT,
+			                              NULL,
+										  7,
+										  16,
+										  USE_FIXED_PIN_FOR_PAIRING,
+										  123456,
+										  NO_BONDING);
+	if(status != BLE_STATUS_SUCCESS){
+        printf("aci_gap_set_auth_requirement failed\n\r");
+	}
+
 
 }
 
 void FitnessController_BLE_Process(void){
 	//make device discoverable
-	if(connected){
-		SetConnectable();
+	if(discoverable == DEVICE_NOTDISCOVERABLE){
+		SetDiscoverable();
 	}
 	FitnessControllerDataFlag_t DataFlag = FitnessControllerUpdateState(&FitnessController);
     if(DataFlag == FC_NewDataAvailable){
@@ -179,10 +201,13 @@ static void AddServices(void){
 
 }
 
-static tBleStatus SetConnectable(void){
+static tBleStatus SetDiscoverable(void){
 	tBleStatus status;
     status = aci_gap_set_discoverable(ADV_IND, 0, 0, PUBLIC_ADDR, NO_WHITE_LIST_USE, sizeof(local_name), local_name, 0, NULL, 0, 0);
-    connected = DEVICE_CONNECTED;
+    if(status == BLE_STATUS_SUCCESS){
+    	discoverable = DEVICE_DISCOVERABLE;
+    }
+
 	if(status != BLE_STATUS_SUCCESS){
 		printf("aci_gap_set_discoverable failed\n\r");
 	}
@@ -191,7 +216,58 @@ static tBleStatus SetConnectable(void){
 }
 
 static void ControllerEventNotify(void *pData){
+	  hci_uart_pckt *hci_pckt = pData;
+	  /* obtain event packet */
+	  hci_event_pckt *event_pckt = (hci_event_pckt*)hci_pckt->data;
+	  tBleStatus status;
 
+	  if(hci_pckt->type != HCI_EVENT_PKT){
+	    return;
+	  }
+
+	  switch(event_pckt->evt){
+	    case EVT_DISCONN_COMPLETE:
+	      {
+	    	  SetDiscoverable();
+	    	  connected = DEVICE_CONNECTABLE;
+	      }
+	      break;
+
+	    case EVT_LE_META_EVENT:
+	      {
+	        evt_le_meta_event *evt = (void *)event_pckt->data;
+
+	        switch(evt->subevent){
+	        case EVT_LE_CONN_COMPLETE:
+	          {
+	            evt_le_connection_complete *cc = (void *)evt->data;
+	            connection_handle = cc->handle;
+	            status = aci_gap_slave_security_request(connection_handle, NO_BONDING, MITM_PROTECTION_NOT_REQUIRED);
+	            if(status == BLE_STATUS_SUCCESS){
+	                connected = DEVICE_CONNECTED;
+	            }
+	          }
+	          break;
+	        }
+	      }
+	      break;
+
+	    case EVT_VENDOR:
+	      {
+	        evt_blue_aci *blue_evt = (void*)event_pckt->data;
+	        switch(blue_evt->ecode){
+	        case(EVT_BLUE_GATT_ATTRIBUTE_MODIFIED):
+	        		break;
+	        case(EVT_BLUE_GAP_PASS_KEY_REQUEST):
+	        		break;
+	        case(EVT_BLUE_GAP_PAIRING_CMPLT):
+	        		break;
+	        case(EVT_BLUE_GAP_BOND_LOST):
+	        		break;
+	        }
+	      }
+	      break;
+	    }
 }
 
 static void ControllerButtonInit(FitnessControllerHandle_t *FitnessController){
