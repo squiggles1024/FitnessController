@@ -11,6 +11,8 @@
 #include "button.h"
 #include "trigger.h"
 #include "analog_stick.h"
+#include "dpad.h"
+#include "MAX30102.h"
 
 typedef enum{
 	FC_NoDataAvailable,
@@ -23,6 +25,7 @@ typedef struct{
 }ControllerButton_t;
 
 typedef struct{
+    Dpad_Handle_t Dpad;
 	ControllerButton_t Buttons[NUMBER_OF_BUTTONS];
 	Trigger_Handle_t Triggers[NUMBER_OF_TRIGGERS];
 	AnalogStick_Handle_t Sticks[NUMBER_OF_STICKS];
@@ -34,5 +37,7 @@ void FitnessControllerHardwareInit(FitnessControllerHandle_t *FitnessController)
 FitnessControllerDataFlag_t FitnessControllerUpdateState(FitnessControllerHandle_t *FitnessController);
 void FitnessControllerBLEInit(void);
 void FitnessController_BLE_Process(void);
+
+extern MAX30102_Handle_t HeartRateMonitor;
 
 #endif /* INC_FITNESSCONTROLLER_FITNESSCONTROLLER_H_ */
