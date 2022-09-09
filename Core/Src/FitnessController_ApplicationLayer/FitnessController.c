@@ -22,6 +22,7 @@
 #include "BatteryService.h"
 #include "DeviceInfoService.h"
 #include "HID.h"
+#include "MAX30102.h"
 
 #define DEVICE_CONNECTABLE (1)
 #define DEVICE_CONNECTED (0)
@@ -33,6 +34,7 @@
 #define XINPUT_RIGHTANALOG_INDEX (1U)
 
 FitnessControllerHandle_t FitnessController;
+MAX30102_Handle_t HeartRateMonitor;
 
 static const uint8_t SERVER_BDADDR[] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
 static const char local_name[] = {AD_TYPE_COMPLETE_LOCAL_NAME,'F', 'i', 't', 'n', 'e','s','s',' ','C','o','n','t','r','o','l','l','e','r'};
@@ -45,21 +47,19 @@ static void ControllerEventNotify(void *pData);
 static void ControllerButtonInit(FitnessControllerHandle_t *FitnessController);
 static void ControllerTriggerInit(FitnessControllerHandle_t *FitnessController);
 static void ControllerStickInit(FitnessControllerHandle_t *FitnessController);
+static void ControllerDpadInit(FitnessControllerHandle_t *FitnessController);
+static void HeartRateInit(FitnessControllerHandle_t *FitnessController);
 static const uint16_t ButtonMskLUT[NUMBER_OF_BUTTONS] = {
-		0x0001, //dpad up
-		0x0002, //dpad down
-		0x0004, //dpad left
-		0x0008, //dpad right
+		0x0001, //a
+		0x0002, //b
+		0x0004, //x
+		0x0008, //y
 		0x0010, //start
 		0x0020, //back
-		0x1000, //left thumb
-		0x2000, //right thumb
-		0x0040, //left shoulder
-		0x0080, //right shoulder
-		0x0100, //a
-		0x0200, //b
-		0x0400, //x
-		0x0800  //y
+		0x0040, //left thumb
+		0x0080, //right thumb
+		0x0100, //left shoulder
+		0x0200  //right shoulder
 };
 
 
@@ -144,6 +144,8 @@ void FitnessControllerHardwareInit(FitnessControllerHandle_t *FitnessController)
 	ControllerButtonInit(FitnessController);
 	ControllerTriggerInit(FitnessController);
 	ControllerStickInit(FitnessController);
+	ControllerDpadInit(FitnessController);
+	//HeartRateInit(FitnessController);
 }
 
 FitnessControllerDataFlag_t FitnessControllerUpdateState(FitnessControllerHandle_t *FitnessController){
@@ -173,6 +175,13 @@ FitnessControllerDataFlag_t FitnessControllerUpdateState(FitnessControllerHandle
         	HIDReport.Sticks[i*2+1] = FitnessController->Sticks[i].Y_Position;
         }
     }
+    if(DpadRead(&FitnessController->Dpad) == DpadChanged){
+    	ReturnStatus |= FC_NewDataAvailable;
+    	HIDReport.Dpad = FitnessController->Dpad.State;
+    }
+
+    //MAX30102_ReadHeartRate(&HeartRateMonitor);
+
     return ReturnStatus;
 }
 
@@ -290,4 +299,22 @@ static void ControllerTriggerInit(FitnessControllerHandle_t *FitnessController){
 static void ControllerStickInit(FitnessControllerHandle_t *FitnessController){
    AnalogStickInit(&FitnessController->Sticks[XINPUT_LEFTANALOG_INDEX], AnalogStickIO_Driver1);
    AnalogStickInit(&FitnessController->Sticks[XINPUT_RIGHTANALOG_INDEX], AnalogStickIO_Driver2);
+}
+
+static void ControllerDpadInit(FitnessControllerHandle_t *FitnessController){
+   DpadInit(1, &FitnessController->Dpad, HatSwitchIO_Driver);
+}
+
+static void HeartRateInit(FitnessControllerHandle_t *FitnessController){
+	MAX30102_Init_Struct_t Settings = {
+			.ADCFull = FULLSCALE2048,
+			.FifoFull = 0,
+			.IRQMode = Max30102NoIRQ,
+			.LED_PWM = LED_PULSEWIDTH69,
+			.Mode = HeartRateMode,
+			.RollOver = FifoRollOverDisabled,
+			.SampleRate = SAMPLERATE50,
+			.SamplingAvg = EIGHTSAMPLESAVG
+	};
+     MAX30102_Init(Settings, &HeartRateMonitor, MAX30102_Hardware_Drv);
 }
