@@ -1,4 +1,6 @@
-Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
+Core/Src/FitnessController_ApplicationLayer/MAX30102_Hardware.o: \
+ ../Core/Src/FitnessController_ApplicationLayer/MAX30102_Hardware.c \
+ ../Core/Inc/FitnessController/MAX30102_Hardware.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
  ../Core/Inc/stm32l4xx_hal_conf.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h \
@@ -32,24 +34,12 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
+ ../Core/Inc/gpio.h ../Core/Inc/main.h \
  ../BlueNRG-MS/Target/hci_tl_interface.h \
  ../Drivers/BSP/B-L475E-IOT01A1/b_l475e_iot01a1_bus.h \
  ../Core/Inc/b_l475e_iot01a1_conf.h \
- ../Drivers/BSP/B-L475E-IOT01A1/b_l475e_iot01a1_errno.h ../Core/Inc/adc.h \
- ../Core/Inc/main.h ../Core/Inc/dma.h ../Core/Inc/i2c.h \
- ../Core/Inc/usart.h ../Core/Inc/gpio.h \
- ../Core/Inc/FitnessController/FitnessController.h \
- ../Core/Inc/FitnessController/Controller_Parts/button.h \
- ../Core/Inc/FitnessController/Controller_Parts/button_hardware.h \
- ../Core/Inc/FitnessController/Controller_Parts/trigger.h \
- ../Core/Inc/FitnessController/Controller_Parts/trigger_hardware.h \
- ../Core/Inc/FitnessController/Controller_Parts/analog_stick.h \
- ../Core/Inc/FitnessController/Controller_Parts/analog_stick_hardware.h \
- ../Core/Inc/FitnessController/Controller_Parts/dpad.h \
- ../Core/Inc/FitnessController/Controller_Parts/dpad_hardware.h \
- ../Core/Inc/FitnessController/MAX30102.h \
- ../Core/Inc/FitnessController/MAX30102_Hardware.h
-../Core/Inc/main.h:
+ ../Drivers/BSP/B-L475E-IOT01A1/b_l475e_iot01a1_errno.h ../Core/Inc/i2c.h
+../Core/Inc/FitnessController/MAX30102_Hardware.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h:
@@ -83,24 +73,10 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
+../Core/Inc/gpio.h:
+../Core/Inc/main.h:
 ../BlueNRG-MS/Target/hci_tl_interface.h:
 ../Drivers/BSP/B-L475E-IOT01A1/b_l475e_iot01a1_bus.h:
 ../Core/Inc/b_l475e_iot01a1_conf.h:
 ../Drivers/BSP/B-L475E-IOT01A1/b_l475e_iot01a1_errno.h:
-../Core/Inc/adc.h:
-../Core/Inc/main.h:
-../Core/Inc/dma.h:
 ../Core/Inc/i2c.h:
-../Core/Inc/usart.h:
-../Core/Inc/gpio.h:
-../Core/Inc/FitnessController/FitnessController.h:
-../Core/Inc/FitnessController/Controller_Parts/button.h:
-../Core/Inc/FitnessController/Controller_Parts/button_hardware.h:
-../Core/Inc/FitnessController/Controller_Parts/trigger.h:
-../Core/Inc/FitnessController/Controller_Parts/trigger_hardware.h:
-../Core/Inc/FitnessController/Controller_Parts/analog_stick.h:
-../Core/Inc/FitnessController/Controller_Parts/analog_stick_hardware.h:
-../Core/Inc/FitnessController/Controller_Parts/dpad.h:
-../Core/Inc/FitnessController/Controller_Parts/dpad_hardware.h:
-../Core/Inc/FitnessController/MAX30102.h:
-../Core/Inc/FitnessController/MAX30102_Hardware.h:

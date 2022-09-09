@@ -1,0 +1,2 @@
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/dpad.c:22:6:DpadInit	24	static
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/dpad.c:36:14:DpadRead	24	static

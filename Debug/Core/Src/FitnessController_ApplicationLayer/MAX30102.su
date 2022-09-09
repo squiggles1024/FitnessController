@@ -1,0 +1,6 @@
+../Core/Src/FitnessController_ApplicationLayer/MAX30102.c:9:6:MAX30102_Init	40	static
+../Core/Src/FitnessController_ApplicationLayer/MAX30102.c:26:6:MAX30102_DeInit	16	static
+../Core/Src/FitnessController_ApplicationLayer/MAX30102.c:30:6:MAX30102_Reset	24	static
+../Core/Src/FitnessController_ApplicationLayer/MAX30102.c:35:19:MAX30102_ReadHeartRate	24	static
+../Core/Src/FitnessController_ApplicationLayer/MAX30102.c:47:6:MAX30102_ReadReg	24	static
+../Core/Src/FitnessController_ApplicationLayer/MAX30102.c:51:6:MAX30102_WriteReg	24	static

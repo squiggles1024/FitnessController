@@ -1,0 +1,3 @@
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/dpad_hardware.c:47:13:HatSwitch_IO_init	8	static
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/dpad_hardware.c:55:13:HatSwitch_IO_deinit	4	static
+../Core/Src/FitnessController_ApplicationLayer/Controller_Parts/dpad_hardware.c:70:25:HatSwitch_IO_Read	24	static

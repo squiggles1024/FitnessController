@@ -5,13 +5,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Core/Src/FitnessController_ApplicationLayer/FitnessController.c 
+../Core/Src/FitnessController_ApplicationLayer/FitnessController.c \
+../Core/Src/FitnessController_ApplicationLayer/MAX30102.c \
+../Core/Src/FitnessController_ApplicationLayer/MAX30102_Hardware.c 
 
 OBJS += \
-./Core/Src/FitnessController_ApplicationLayer/FitnessController.o 
+./Core/Src/FitnessController_ApplicationLayer/FitnessController.o \
+./Core/Src/FitnessController_ApplicationLayer/MAX30102.o \
+./Core/Src/FitnessController_ApplicationLayer/MAX30102_Hardware.o 
 
 C_DEPS += \
-./Core/Src/FitnessController_ApplicationLayer/FitnessController.d 
+./Core/Src/FitnessController_ApplicationLayer/FitnessController.d \
+./Core/Src/FitnessController_ApplicationLayer/MAX30102.d \
+./Core/Src/FitnessController_ApplicationLayer/MAX30102_Hardware.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -21,7 +27,7 @@ Core/Src/FitnessController_ApplicationLayer/%.o Core/Src/FitnessController_Appli
 clean: clean-Core-2f-Src-2f-FitnessController_ApplicationLayer
 
 clean-Core-2f-Src-2f-FitnessController_ApplicationLayer:
-	-$(RM) ./Core/Src/FitnessController_ApplicationLayer/FitnessController.d ./Core/Src/FitnessController_ApplicationLayer/FitnessController.o ./Core/Src/FitnessController_ApplicationLayer/FitnessController.su
+	-$(RM) ./Core/Src/FitnessController_ApplicationLayer/FitnessController.d ./Core/Src/FitnessController_ApplicationLayer/FitnessController.o ./Core/Src/FitnessController_ApplicationLayer/FitnessController.su ./Core/Src/FitnessController_ApplicationLayer/MAX30102.d ./Core/Src/FitnessController_ApplicationLayer/MAX30102.o ./Core/Src/FitnessController_ApplicationLayer/MAX30102.su ./Core/Src/FitnessController_ApplicationLayer/MAX30102_Hardware.d ./Core/Src/FitnessController_ApplicationLayer/MAX30102_Hardware.o ./Core/Src/FitnessController_ApplicationLayer/MAX30102_Hardware.su
 
 .PHONY: clean-Core-2f-Src-2f-FitnessController_ApplicationLayer
 

@@ -68,10 +68,15 @@ Core/Src/FitnessController_ApplicationLayer/FitnessController.o: \
  ../Core/Inc/FitnessController/Controller_Parts/trigger_hardware.h \
  ../Core/Inc/FitnessController/Controller_Parts/analog_stick.h \
  ../Core/Inc/FitnessController/Controller_Parts/analog_stick_hardware.h \
+ ../Core/Inc/FitnessController/Controller_Parts/dpad.h \
+ ../Core/Inc/FitnessController/Controller_Parts/dpad_hardware.h \
+ ../Core/Inc/FitnessController/MAX30102.h \
+ ../Core/Inc/FitnessController/MAX30102_Hardware.h \
  ../Core/Inc/FitnessController/HIDService/HIDService.h \
  ../Core/Inc/FitnessController/BatteryService/BatteryService.h \
  ../Core/Inc/FitnessController/DeviceInfoService/DeviceInfoService.h \
- ../Core/Inc/FitnessController/HIDService/HID.h
+ ../Core/Inc/FitnessController/HIDService/HID.h \
+ ../Core/Inc/FitnessController/MAX30102.h
 ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_utils.h:
 ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_types.h:
 ../Middlewares/ST/BlueNRG-MS/includes/compiler.h:
@@ -140,7 +145,12 @@ Core/Src/FitnessController_ApplicationLayer/FitnessController.o: \
 ../Core/Inc/FitnessController/Controller_Parts/trigger_hardware.h:
 ../Core/Inc/FitnessController/Controller_Parts/analog_stick.h:
 ../Core/Inc/FitnessController/Controller_Parts/analog_stick_hardware.h:
+../Core/Inc/FitnessController/Controller_Parts/dpad.h:
+../Core/Inc/FitnessController/Controller_Parts/dpad_hardware.h:
+../Core/Inc/FitnessController/MAX30102.h:
+../Core/Inc/FitnessController/MAX30102_Hardware.h:
 ../Core/Inc/FitnessController/HIDService/HIDService.h:
 ../Core/Inc/FitnessController/BatteryService/BatteryService.h:
 ../Core/Inc/FitnessController/DeviceInfoService/DeviceInfoService.h:
 ../Core/Inc/FitnessController/HIDService/HID.h:
+../Core/Inc/FitnessController/MAX30102.h:
