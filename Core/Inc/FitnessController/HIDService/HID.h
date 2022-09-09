@@ -22,6 +22,7 @@ typedef struct{
 
 typedef struct{
 	//uint8_t report_id;
+	uint8_t Dpad;
 	uint16_t Buttons;
 	uint8_t Triggers[2];
 	int16_t Sticks[4];
@@ -32,7 +33,7 @@ typedef uint8_t HIDControlPoint_t;
 extern HIDControlPoint_t HIDControlPoint;
 extern HIDReportChar_t HIDReport;
 extern const HIDInfoChar_t HIDInfoValue;
-extern const uint8_t HID_ReportMap[84];
+extern const uint8_t HID_ReportMap[92];
 extern const HIDReportRefDesc_t ReportRefDesc;
 
 #endif /* INC_FITNESSCONTROLLER_HIDSERVICE_HID_H_ */

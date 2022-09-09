@@ -1,12 +1,12 @@
 /*
- * button_hardware.h
+ * dpad_hardware.h
  *
- *  Created on: Sep 2, 2022
+ *  Created on: Sep 7, 2022
  *      Author: evanl
  */
 
-#ifndef INC_FITNESSCONTROLLER_CONTROLLER_PARTS_BUTTON_HARDWARE_H_
-#define INC_FITNESSCONTROLLER_CONTROLLER_PARTS_BUTTON_HARDWARE_H_
+#ifndef INC_FITNESSCONTROLLER_CONTROLLER_PARTS_DPAD_HARDWARE_H_
+#define INC_FITNESSCONTROLLER_CONTROLLER_PARTS_DPAD_HARDWARE_H_
 /**************************************//**************************************//**************************************
  * Includes
  **************************************//**************************************//**************************************/
@@ -16,15 +16,22 @@
 /**************************************//**************************************//**************************************
  * Defines
  **************************************//**************************************//**************************************/
-#define NUMBER_OF_BUTTONS (10U)
+#define NUMBER_OF_HATSW (1U)
 
 /**************************************//**************************************//**************************************
  * Enums
  **************************************//**************************************//**************************************/
 typedef enum{
-	ButtonUnpressed = 0,
-	ButtonPressed
-}ButtonState_t;
+	HatNeutral = 0,
+    HatUp,
+	HatUpRight,
+	HatRight,
+	HatDownRight,
+	HatDown,
+	HatDownLeft,
+	HatLeft,
+	HatUpLeft,
+}HatSwitchState_t;
 
 /**************************************//**************************************//**************************************
  * Driver Structs
@@ -32,17 +39,17 @@ typedef enum{
 typedef struct{
     void (*init)(void);
     void (*deinit)(void);
-    ButtonState_t (*read)(uint8_t);
+    HatSwitchState_t (*read)(uint8_t);
     void (*write)(void);
     uint8_t (*ioctl)(uint8_t);
-}Button_IO_Drv_t;
+}HatSwitch_IO_Drv_t;
 
 /**************************************//**************************************//**************************************
  * Exported Variables
  **************************************//**************************************//**************************************/
-extern const Button_IO_Drv_t ButtonIO_DriverPosLogic;
-extern const Button_IO_Drv_t ButtonIO_DriverNegLogic;
+extern const HatSwitch_IO_Drv_t HatSwitchIO_Driver;
 
 
 
-#endif /* INC_FITNESSCONTROLLER_CONTROLLER_PARTS_BUTTON_HARDWARE_H_ */
+
+#endif /* INC_FITNESSCONTROLLER_CONTROLLER_PARTS_DPAD_HARDWARE_H_ */

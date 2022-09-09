@@ -35,20 +35,17 @@ typedef struct{
 static Button_IO_InitStatus_t initialize_status = ButtonIO_Uninitialized;
 
 static const ButtonGPIOWrapper_t ButtonGPIOLUT[NUMBER_OF_BUTTONS] = {
-		{XINPUT_GAMEPAD_DPAD_UP_GPIO_Port, XINPUT_GAMEPAD_DPAD_UP_Pin},               //1
-		{XINPUT_GAMEPAD_DPAD_DOWN_GPIO_Port, XINPUT_GAMEPAD_DPAD_DOWN_Pin},           //2
-		{XINPUT_GAMEPAD_DPAD_LEFT_GPIO_Port, XINPUT_GAMEPAD_DPAD_LEFT_Pin},           //3
-		{XINPUT_GAMEPAD_DPAD_RIGHT_GPIO_Port, XINPUT_GAMEPAD_DPAD_RIGHT_Pin},         //4
+		{XINPUT_GAMEPAD_A_GPIO_Port, XINPUT_GAMEPAD_A_Pin},                           //1
+		{XINPUT_GAMEPAD_B_GPIO_Port, XINPUT_GAMEPAD_B_Pin},                           //2
+		{XINPUT_GAMEPAD_X_GPIO_Port, XINPUT_GAMEPAD_X_Pin},                           //3
+		{XINPUT_GAMEPAD_Y_GPIO_Port, XINPUT_GAMEPAD_Y_Pin},                           //4
 		{XINPUT_GAMEPAD_START_GPIO_Port, XINPUT_GAMEPAD_START_Pin},                   //5
 		{XINPUT_GAMEPAD_BACK_GPIO_Port, XINPUT_GAMEPAD_BACK_Pin},                     //6
 		{XINPUT_GAMEPAD_LEFT_THUMB_GPIO_Port, XINPUT_GAMEPAD_LEFT_THUMB_Pin},         //7
 		{XINPUT_GAMEPAD_RIGHT_THUMB_GPIO_Port, XINPUT_GAMEPAD_RIGHT_THUMB_Pin},       //8
 		{XINPUT_GAMEPAD_LEFT_SHOULDER_GPIO_Port, XINPUT_GAMEPAD_LEFT_SHOULDER_Pin},   //9
 		{XINPUT_GAMEPAD_RIGHT_SHOULDER_GPIO_Port, XINPUT_GAMEPAD_RIGHT_SHOULDER_Pin}, //10
-		{XINPUT_GAMEPAD_A_GPIO_Port, XINPUT_GAMEPAD_A_Pin},                           //11
-		{XINPUT_GAMEPAD_B_GPIO_Port, XINPUT_GAMEPAD_B_Pin},                           //12
-		{XINPUT_GAMEPAD_X_GPIO_Port, XINPUT_GAMEPAD_X_Pin},                           //13
-		{XINPUT_GAMEPAD_Y_GPIO_Port, XINPUT_GAMEPAD_Y_Pin}                            //14
+
 };
 /**************************************//**************************************//**************************************
  * Private Function Definitions

@@ -1,48 +1,45 @@
 /*
- * button_hardware.h
+ * dpad.h
  *
- *  Created on: Sep 2, 2022
+ *  Created on: Sep 7, 2022
  *      Author: evanl
  */
 
-#ifndef INC_FITNESSCONTROLLER_CONTROLLER_PARTS_BUTTON_HARDWARE_H_
-#define INC_FITNESSCONTROLLER_CONTROLLER_PARTS_BUTTON_HARDWARE_H_
+#ifndef INC_FITNESSCONTROLLER_CONTROLLER_PARTS_DPAD_H_
+#define INC_FITNESSCONTROLLER_CONTROLLER_PARTS_DPAD_H_
 /**************************************//**************************************//**************************************
  * Includes
  **************************************//**************************************//**************************************/
+#include "dpad_hardware.h"
 #include <stdint.h>
-
-
-/**************************************//**************************************//**************************************
- * Defines
- **************************************//**************************************//**************************************/
-#define NUMBER_OF_BUTTONS (10U)
 
 /**************************************//**************************************//**************************************
  * Enums
  **************************************//**************************************//**************************************/
 typedef enum{
-	ButtonUnpressed = 0,
-	ButtonPressed
-}ButtonState_t;
+	DpadChanged = 0,
+	DpadUnchanged,
+	DpadErr
+}DpadStatus_t;
 
 /**************************************//**************************************//**************************************
  * Driver Structs
  **************************************//**************************************//**************************************/
+typedef uint8_t DpadIDNumber_t;
+
 typedef struct{
-    void (*init)(void);
-    void (*deinit)(void);
-    ButtonState_t (*read)(uint8_t);
-    void (*write)(void);
-    uint8_t (*ioctl)(uint8_t);
-}Button_IO_Drv_t;
+	DpadIDNumber_t DpadIDNumber;
+    HatSwitchState_t State;
+    HatSwitch_IO_Drv_t IO_Driver;
+}Dpad_Handle_t;
 
 /**************************************//**************************************//**************************************
- * Exported Variables
+ * Public Function Declarations
  **************************************//**************************************//**************************************/
-extern const Button_IO_Drv_t ButtonIO_DriverPosLogic;
-extern const Button_IO_Drv_t ButtonIO_DriverNegLogic;
+void DpadInit(DpadIDNumber_t DpadID, Dpad_Handle_t *Dpad, HatSwitch_IO_Drv_t IO);
+DpadStatus_t DpadRead(Dpad_Handle_t *Dpad);
 
 
 
-#endif /* INC_FITNESSCONTROLLER_CONTROLLER_PARTS_BUTTON_HARDWARE_H_ */
+
+#endif /* INC_FITNESSCONTROLLER_CONTROLLER_PARTS_DPAD_H_ */
